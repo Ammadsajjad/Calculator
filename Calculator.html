@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            white-space: nowrap; /* Added property to prevent wrapping */
+        }
+        .equal{
+            grid-column: span 2;
+        }
+
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .calculator button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button:hover {
+            background-color: #ccc;
+        }
+
+        .calculator .delete {
+            background-color: #ff6347;
+            color: #fff;
+        }
+
+        .calculator .delete:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly>
+        <button onclick="clearResult()"class="delete">AC</button>
+        <button onclick="deleteLastCharacter()" class="delete">Del</button>
+        <button onclick="appendValue('%')"class="delete">%</button>
+        <button onclick="appendValue('/')"class="delete">/</button>
+        <button onclick="appendValue(1)">1</button>
+        <button onclick="appendValue(2)">2</button>
+        <button onclick="appendValue(3)">3</button>
+        <button onclick="appendValue('*')"class="delete">*</button>
+        <button onclick="appendValue(4)">4</button>
+        <button onclick="appendValue(5)">5</button>
+        <button onclick="appendValue(6)">6</button>
+        <button onclick="appendValue('-')"class="delete">-</button>
+        <button onclick="appendValue(7)">7</button>
+        <button onclick="performOperation(8)">8</button>
+        <button onclick="performOperation(9)">9</button>
+        <button onclick="performOperation('+')"class="delete">+</button>
+        <button onclick="performOperation(0)">0</button>
+        <button onclick="appendValue('.')">.</button>
+
+        <button onclick="calculateResult('=')" class="equal">=</button>
+    </div>
+
+    <script>
+        let result = document.getElementById('result');
+
+        function appendValue(value) {
+            result.value += value;
+        }
+
+        function clearResult() {
+            result.value = '';
+        }
+
+        function deleteLastCharacter() {
+            result.value = result.value.slice(0, -1);
+        }
+
+        function performOperation(operator) {
+            result.value += operator;
+        }
+
+        function calculateResult() {
+            try {
+                result.value = eval(result.value);
+            } catch (error) {
+                result.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
